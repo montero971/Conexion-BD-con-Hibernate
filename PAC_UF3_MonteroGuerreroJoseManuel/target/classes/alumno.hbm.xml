@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/HibernateMappingDTD5.3//EN"
+"http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--En la etiqueta <class> he colocado el package delante de la clase para 
+		que no me diera error, el profesor no lo hace en la tutoria, pero el tiene 
+		el "default package -->
+	<class name="pac.Alumno" table="alumnos" catalog="m06">
+		<id name="id">
+			<column name="idAlumno" />
+			<generator class="increment" />
+		</id>
+		<property name="nombre"></property>
+		<property name="nacionalidad"></property>
+		<property name="edad" type="integer"></property>
+		<property name="sexo"></property>
+		<!--La etiqueta "set" he comprobado en la siguiente URL cómo se implementa 
+			y lo he extrapolado a este proyecto: http://cursohibernate.es/doku.php?id=unidades:03_relaciones:05_muchos_a_muchos_desordenada -->
+		<set name="modulos" table="alumno_modulo">
+			<key>
+				<column name="idAlumno" />
+			</key>
+			<many-to-many entity-name="pac.Modulo">
+				<column name="idModulo" />
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
